@@ -1,0 +1,40 @@
+{
+	"schemaVersion": 1,
+	"id": "mcci-utils",
+	"version": "${version}",
+	"name": "MCCI Utils",
+	"description": "Utilities for the Minecraf Championship Island server.",
+	"authors": [
+		"SyddersLMAO"
+	],
+	"contact": {
+		"homepage": "https://links.sydders.com/",
+		"sources": "https://github.com/SyddersLMAO/mcci_utils"
+	},
+	"license": "CC0-1.0",
+	"icon": "assets/mcci-utils/icon.png",
+	"environment": "*",
+	"entrypoints": {
+		"main": [
+			"com.sydders.mcciutils.MCCIUtils"
+		],
+		"fabric-datagen": [
+			"com.sydders.mcciutils.MCCIUtilsDataGenerator"
+		],
+		"client": [
+			"com.sydders.mcciutils.MCCIUtilsClient"
+		]
+	},
+	"mixins": [
+		"mcci-utils.mixins.json"
+	],
+	"depends": {
+		"fabricloader": ">=0.16.14",
+		"minecraft": "~1.21.7",
+		"java": ">=21",
+		"fabric-api": "*"
+	},
+	"suggests": {
+		"another-mod": "*"
+	}
+}

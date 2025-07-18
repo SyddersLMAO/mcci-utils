@@ -1,0 +1,14 @@
+{
+	"required": true,
+	"package": "com.sydders.mcciutils.mixin",
+	"compatibilityLevel": "JAVA_21",
+	"mixins": [
+		"ClientPlayNetworkHandlerMixin"
+	],
+	"injectors": {
+		"defaultRequire": 1
+	},
+	"overwrites": {
+		"requireAnnotations": true
+	}
+}
