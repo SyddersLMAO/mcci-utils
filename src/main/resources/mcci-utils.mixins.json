@@ -4,7 +4,8 @@
 	"compatibilityLevel": "JAVA_21",
 	"mixins": [
 		"ClientPlayNetworkHandlerMixin",
-		"OnServerJoin"
+		"OnServerJoin",
+		"PlayerListHudAccessor"
 	],
 	"injectors": {
 		"defaultRequire": 1
