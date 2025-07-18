@@ -1,6 +1,8 @@
 package com.sydders.mcciutils.mixin;
 
 import com.sydders.mcciutils.MCCIUtils;
+import com.sydders.mcciutils.MCCIUtilsModConfig;
+import me.shedaniel.autoconfig.AutoConfig;
 import net.minecraft.client.network.ClientPlayNetworkHandler;
 import net.minecraft.network.packet.s2c.play.GameMessageS2CPacket;
 import net.minecraft.text.MutableText;
@@ -17,8 +19,11 @@ import java.util.regex.Pattern;
 
 @Mixin(ClientPlayNetworkHandler.class)
 public class ClientPlayNetworkHandlerMixin {
+    MCCIUtilsModConfig config = AutoConfig.getConfigHolder(MCCIUtilsModConfig.class).getConfig();
+
     @Inject(method = "onGameMessage", at = @At("HEAD"), cancellable = true)
     public void onGameMessage(GameMessageS2CPacket packet, CallbackInfo ci) {
+        if (!config.fishHud) {return;}
         String msg = packet.content().getString();
         if (msg.toLowerCase().contains("you caught")) {
             Pattern pattern = Pattern.compile("\\[(.*?)\\]");
@@ -42,7 +47,7 @@ public class ClientPlayNetworkHandlerMixin {
                         .setStyle(Style.EMPTY.withFont(Identifier.of("mcc", "icon")));
                 Text nameComponent = Text.literal(normalText.toString().trim());
 
-                MCCIUtils.ChatMessageStorage.latestMessage = Text.empty().append(nameComponent).append(iconComponent);
+                MCCIUtils.ChatMessageStorage.setMessage(Text.empty().append(iconComponent).append(nameComponent));
 
                 MCCIUtils.LOGGER.info("Caught fish (text): " + normalText);
                 MCCIUtils.LOGGER.info("Caught fish (icons): " + iconText);
@@ -61,10 +66,10 @@ public class ClientPlayNetworkHandlerMixin {
                         .setStyle(Style.EMPTY.withFont(Identifier.of("mcc", "icon")));
 
                 if (MCCIUtils.ChatMessageStorage.latestMessage == null) {
-                    MCCIUtils.ChatMessageStorage.latestMessage = Text.empty();
+                    MCCIUtils.ChatMessageStorage.setMessage(Text.empty());
                 }
 
-                MCCIUtils.ChatMessageStorage.latestMessage = Text.empty().append(MCCIUtils.ChatMessageStorage.latestMessage).append(" ").append(iconComponent);
+                MCCIUtils.ChatMessageStorage.setMessage(Text.empty().append(MCCIUtils.ChatMessageStorage.latestMessage).append(" ").append(iconComponent));
 
                 MCCIUtils.LOGGER.info("Triggered icons: " + iconText);
             }
@@ -81,7 +86,7 @@ public class ClientPlayNetworkHandlerMixin {
             }
 
             if (islandXp != 0) {
-                MCCIUtils.ChatMessageStorage.latestMessage = Text.empty().append(MCCIUtils.ChatMessageStorage.latestMessage).append(" ").append("+" + islandXp + "xp");
+                MCCIUtils.ChatMessageStorage.setMessage(Text.empty().append(MCCIUtils.ChatMessageStorage.latestMessage).append(" ").append("+" + islandXp + "xp"));
             }
 
             ci.cancel();

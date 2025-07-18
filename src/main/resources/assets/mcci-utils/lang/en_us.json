@@ -1,0 +1,7 @@
+{
+  "text.autoconfig.mcci_utils.title": "MCCI Utils Config",
+  "text.autoconfig.mcci-utils.option.fishHud": "Enable Fish HUD",
+  "text.autoconfig.mcci-utils.option.fishHudFadeTime": "Fish HUD Fade Timer",
+  "text.autoconfig.mcci-utils.option.instance": "Auto join instance number",
+  "text.autoconfig.mcci-utils.option.autoFishtance": "Enable auto join instance"
+}

@@ -15,7 +15,14 @@ public class MCCIUtils implements ModInitializer {
 		LOGGER.info("Hello Fabric world!");
 	}
 
-	public class ChatMessageStorage {
+	public static class ChatMessageStorage {
 		public static MutableText latestMessage = null;
+		public static long lastUpdatedTime = 0;
+
+		public static void setMessage(MutableText msg) {
+			latestMessage = msg;
+			lastUpdatedTime = System.currentTimeMillis();
+		}
 	}
+
 }

@@ -3,7 +3,7 @@
 	"id": "mcci-utils",
 	"version": "${version}",
 	"name": "MCCI Utils",
-	"description": "Utilities for the Minecraf Championship Island server.",
+	"description": "Utilities for the Minecraft Championship Island server.",
 	"authors": [
 		"SyddersLMAO"
 	],
@@ -23,6 +23,9 @@
 		],
 		"client": [
 			"com.sydders.mcciutils.MCCIUtilsClient"
+		],
+		"modmenu": [
+			"com.sydders.mcciutils.MCCIUtilsModMenu"
 		]
 	},
 	"mixins": [
