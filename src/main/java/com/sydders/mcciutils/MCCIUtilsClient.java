@@ -1,11 +1,16 @@
 package com.sydders.mcciutils;
 
+import com.sydders.mcciutils.mixin.PlayerListHudAccessor;
 import me.shedaniel.autoconfig.AutoConfig;
 import me.shedaniel.autoconfig.serializer.JanksonConfigSerializer;
 import net.fabricmc.api.ClientModInitializer;
 import net.fabricmc.fabric.api.client.rendering.v1.HudRenderCallback;
 import net.minecraft.client.MinecraftClient;
+import net.minecraft.client.gui.DrawContext;
+import net.minecraft.client.gui.hud.PlayerListHud;
+import net.minecraft.client.render.RenderTickCounter;
 import net.minecraft.text.MutableText;
+import net.minecraft.text.Text;
 
 import java.util.Objects;
 
@@ -33,6 +38,5 @@ public class MCCIUtilsClient implements ClientModInitializer {
                 drawContext.drawText(textRenderer, msg, x, y, 0xFFFFFF | alpha, false);
             }
         }));
-
     }
 }
