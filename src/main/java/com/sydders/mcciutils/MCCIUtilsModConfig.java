@@ -8,6 +8,8 @@ public class MCCIUtilsModConfig implements ConfigData {
     public boolean fishHud = true;
     public int fishHudFadeTime = 5000;
 
+    public boolean treasureOutput = false;
+
     public int instance = 8;
     public boolean autoFishtance = false;
 }
