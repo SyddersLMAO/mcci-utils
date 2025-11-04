@@ -3,5 +3,7 @@
   "text.autoconfig.mcci-utils.option.fishHud": "Enable Fish HUD",
   "text.autoconfig.mcci-utils.option.fishHudFadeTime": "Fish HUD Fade Timer",
   "text.autoconfig.mcci-utils.option.instance": "Auto join instance number",
-  "text.autoconfig.mcci-utils.option.autoFishtance": "Enable auto join instance"
+  "text.autoconfig.mcci-utils.option.autoFishtance": "Enable auto join instance",
+  "text.autoconfig.mcci-utils.option.gameOverMessageToggle": "Send Game Over Message",
+  "text.autoconfig.mcci-utils.option.gameOverMessage": "Game Over Message"
 }

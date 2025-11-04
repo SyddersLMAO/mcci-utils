@@ -5,8 +5,8 @@ on: [ pull_request, workflow_dispatch ]
 env:
   MINECRAFT_VERSION: 1.21.10
   JAVA_VERSION: 21
-  VERSION: 1.2.0
-  RELEASE_NAME: MCCI Utils V1.2.0
+  VERSION: 1.2.1
+  RELEASE_NAME: MCCI Utils 1.2.1
 
 permissions:
   contents: write
