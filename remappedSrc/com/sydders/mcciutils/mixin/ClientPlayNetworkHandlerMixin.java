@@ -47,7 +47,7 @@ public class ClientPlayNetworkHandlerMixin {
                 }
 
                 Text iconComponent = Text.literal(iconText.toString())
-                        .setStyle(Style.EMPTY.withFont(new StyleSpriteSource.Font(Identifier.of("mcc", "icon"))));
+                        .setStyle(Style.EMPTY.withFont(new StyleSpriteSource.Id(Identifier.of("mcc", "icon"))));
                 Text nameComponent = Text.literal(normalText.toString().trim());
 
                 MCCIUtils.ChatMessageStorage.setMessage(Text.empty().append(iconComponent).append(nameComponent));
@@ -66,7 +66,7 @@ public class ClientPlayNetworkHandlerMixin {
 
             if (!iconText.isEmpty()) {
                 Text iconComponent = Text.literal(iconText.toString())
-                        .setStyle(Style.EMPTY.withFont(new StyleSpriteSource.Font(Identifier.of("mcc", "icon"))));
+                        .setStyle(Style.EMPTY.withFont(new StyleSpriteSource.Id(Identifier.of("mcc", "icon"))));
 
                 if (MCCIUtils.ChatMessageStorage.latestMessage == null) {
                     MCCIUtils.ChatMessageStorage.setMessage(Text.empty());
