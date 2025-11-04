@@ -3,6 +3,7 @@ package com.sydders.mcciutils.mixin;
 import com.sydders.mcciutils.MCCIUtils;
 import com.sydders.mcciutils.MCCIUtilsModConfig;
 import me.shedaniel.autoconfig.AutoConfig;
+import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.network.ClientPlayNetworkHandler;
 import net.minecraft.network.packet.s2c.play.GameMessageS2CPacket;
 import net.minecraft.text.Style;
@@ -93,6 +94,10 @@ public class ClientPlayNetworkHandlerMixin {
             }
 
             ci.cancel();
+        }
+
+        if (msg.contains("Game Over!")) {
+            MinecraftClient.getInstance().player.networkHandler.sendChatMessage(config.gameOverMessage);
         }
     }
 }

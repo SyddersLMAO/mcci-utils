@@ -10,4 +10,7 @@ public class MCCIUtilsModConfig implements ConfigData {
 
     public int instance = 8;
     public boolean autoFishtance = false;
+
+    public boolean gameOverMessageToggle = true;
+    public String gameOverMessage = "GG";
 }
