@@ -42,12 +42,12 @@ jobs:
         with:
           # Only include this section if you wish to publish
           # your assets on Modrinth.
-          modrinth-id: AANobbMI
+          modrinth-id: ALoUie3F
           modrinth-token: ${{ secrets.MODRINTH_TOKEN }}
 
           # Only include this section if you wish to publish
           # your assets on CurseForge.
-          curseforge-id: 394468
+          curseforge-id: 1309394
           curseforge-token: ${{ secrets.CURSEFORGE_TOKEN }}
 
           # Only include this section if you wish to publish
