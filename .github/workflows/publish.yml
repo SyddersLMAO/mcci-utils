@@ -5,6 +5,8 @@ on: [ pull_request, workflow_dispatch ]
 env:
   MINECRAFT_VERSION: 1.21.10
   JAVA_VERSION: 21
+  VERSION: 1.1.0+1.19.2
+  RELEASE_NAME: MCCI Utils V${{env.VERSION}}
 
 permissions:
   contents: write
@@ -53,3 +55,12 @@ jobs:
           # Only include this section if you wish to publish
           # your assets on GitHub.
           github-token: ${{ secrets.PUBLISH_GITHUB_TOKEN }}
+
+          name: "${{env.RELEASE_NAME}}"
+          version: "${{env.VERSION}}"
+          version-type: release
+          changelog-file: CHANGELOG.md
+
+          loaders: fabric
+          game-versions: "${{env.MINECRAFT_VERSION}}"
+          java: "${{env.JAVA_VERSION}}"
