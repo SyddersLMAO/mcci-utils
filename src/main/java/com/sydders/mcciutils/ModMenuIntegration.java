@@ -3,10 +3,7 @@ package com.sydders.mcciutils;
 import com.terraformersmc.modmenu.api.ConfigScreenFactory;
 import com.terraformersmc.modmenu.api.ModMenuApi;
 import dev.isxander.yacl3.api.*;
-import dev.isxander.yacl3.api.controller.CyclingListControllerBuilder;
-import dev.isxander.yacl3.api.controller.IntegerFieldControllerBuilder;
-import dev.isxander.yacl3.api.controller.IntegerSliderControllerBuilder;
-import dev.isxander.yacl3.api.controller.TickBoxControllerBuilder;
+import dev.isxander.yacl3.api.controller.*;
 import net.minecraft.network.chat.Component;
 
 import java.util.List;
@@ -33,6 +30,22 @@ public class ModMenuIntegration implements ModMenuApi {
                                         () -> Config.HANDLER.instance().autoInstanceNumber,
                                         val -> Config.HANDLER.instance().autoInstanceNumber = val)
                                 .controller(IntegerFieldControllerBuilder::create)
+                                .build())
+                        .option(Option.<Boolean>createBuilder()
+                                .name(Component.literal("Send Game Over Message"))
+                                .description(OptionDescription.of(Component.literal("Automatically send a message when a game finishes.")))
+                                .binding(false,
+                                        () -> Config.HANDLER.instance().sendGameOverMessage,
+                                        val -> Config.HANDLER.instance().sendGameOverMessage = val)
+                                .controller(TickBoxControllerBuilder::create)
+                                .build())
+                        .option(Option.<String>createBuilder()
+                                .name(Component.literal("Game Over Message"))
+                                .description(OptionDescription.of(Component.literal("The message to send when a game finishes.")))
+                                .binding("GG",
+                                        () -> Config.HANDLER.instance().gameOverMessage,
+                                        val -> Config.HANDLER.instance().gameOverMessage = val)
+                                .controller(StringControllerBuilder::create)
                                 .build())
                         .build())
                 .category(ConfigCategory.createBuilder()

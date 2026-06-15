@@ -22,6 +22,12 @@ public class Config {
     public int autoInstanceNumber = 8;
 
     @SerialEntry
+    public boolean sendGameOverMessage = true;
+
+    @SerialEntry
+    public String gameOverMessage = "GG";
+
+    @SerialEntry
     public boolean fishHud = true;
 
     @SerialEntry

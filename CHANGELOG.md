@@ -1,1 +1,2 @@
 - added a configurable timer to the fishing hud fading
+- added auto gg with configurable message
