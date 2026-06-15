@@ -2,12 +2,10 @@ package com.sydders.mcciutils;
 
 import com.terraformersmc.modmenu.api.ConfigScreenFactory;
 import com.terraformersmc.modmenu.api.ModMenuApi;
-import dev.isxander.yacl3.api.ConfigCategory;
-import dev.isxander.yacl3.api.Option;
-import dev.isxander.yacl3.api.OptionDescription;
-import dev.isxander.yacl3.api.YetAnotherConfigLib;
+import dev.isxander.yacl3.api.*;
 import dev.isxander.yacl3.api.controller.CyclingListControllerBuilder;
 import dev.isxander.yacl3.api.controller.IntegerFieldControllerBuilder;
+import dev.isxander.yacl3.api.controller.IntegerSliderControllerBuilder;
 import dev.isxander.yacl3.api.controller.TickBoxControllerBuilder;
 import net.minecraft.network.chat.Component;
 
@@ -39,30 +37,45 @@ public class ModMenuIntegration implements ModMenuApi {
                         .build())
                 .category(ConfigCategory.createBuilder()
                         .name(Component.literal("Fishing"))
-                        .option(Option.<Boolean>createBuilder()
-                                .name(Component.literal("Fish HUD"))
-                                .description(OptionDescription.of(Component.literal("Displays the fishing hud when catching fish.")))
-                                .binding(true,
-                                        () -> Config.HANDLER.instance().fishHud,
-                                        val -> Config.HANDLER.instance().fishHud = val)
-                                .controller(TickBoxControllerBuilder::create)
+                        .group(OptionGroup.createBuilder()
+                                .name(Component.literal("Fishing HUD"))
+                                .description(OptionDescription.of(Component.literal("Settings for the fishing HUD")))
+                                .option(Option.<Boolean>createBuilder()
+                                        .name(Component.literal("Fish HUD"))
+                                        .description(OptionDescription.of(Component.literal("Displays the fishing hud when catching fish.")))
+                                        .binding(true,
+                                                () -> Config.HANDLER.instance().fishHud,
+                                                val -> Config.HANDLER.instance().fishHud = val)
+                                        .controller(TickBoxControllerBuilder::create)
+                                        .build())
+                                .option(Option.<FishingHudPosition>createBuilder()
+                                        .name(Component.literal("Fishing Hud Position"))
+                                        .description(OptionDescription.of(Component.literal("The position of the fishing HUD")))
+                                        .binding(FishingHudPosition.TOP_LEFT,
+                                                () -> Config.HANDLER.instance().fishingHudPosition,
+                                                val -> Config.HANDLER.instance().fishingHudPosition = val)
+                                        .controller(opt -> CyclingListControllerBuilder.create(opt)
+                                                .values(List.of(FishingHudPosition.values()))
+                                                .formatValue(val -> Component.literal(switch (val) {
+                                                    case TOP_LEFT -> "Top Left";
+                                                    case TOP_RIGHT -> "Top Right";
+                                                    case BOTTOM_LEFT -> "Bottom Left";
+                                                    case BOTTOM_RIGHT -> "Bottom Right";
+                                                })))
+                                        .build())
+                                .option(Option.<Integer>createBuilder()
+                                        .name(Component.literal("Display Duration"))
+                                        .description(OptionDescription.of(Component.literal("The length of time the fishing hud is displayed.")))
+                                        .binding(5,
+                                                () -> Config.HANDLER.instance().fishingHudFadeTimer,
+                                                val -> Config.HANDLER.instance().fishingHudFadeTimer = val)
+                                        .controller(opt -> IntegerSliderControllerBuilder.create(opt)
+                                                .range(1, 10)
+                                                .step(1)
+                                                .formatValue(val -> Component.literal(val + "s")))
+                                        .build())
                                 .build())
-                        .option(Option.<FishingHudPosition>createBuilder()
-                                .name(Component.literal("Fishing Hud Position"))
-                                .description(OptionDescription.of(Component.literal("The position of the fishing HUD")))
-                                .binding(FishingHudPosition.TOP_LEFT,
-                                        () -> Config.HANDLER.instance().fishingHudPosition,
-                                        val -> Config.HANDLER.instance().fishingHudPosition = val)
-                                .controller(opt -> CyclingListControllerBuilder.create(opt)
-                                        .values(List.of(FishingHudPosition.values()))
-                                        .formatValue(val -> Component.literal(switch (val) {
-                                            case TOP_LEFT -> "Top Left";
-                                            case TOP_RIGHT -> "Top Right";
-                                            case BOTTOM_LEFT -> "Bottom Left";
-                                            case BOTTOM_RIGHT -> "Bottom Right";
-                                        })))
                                 .build())
-                        .build())
                 .build()
                 .generateScreen(parentScreen);
     }

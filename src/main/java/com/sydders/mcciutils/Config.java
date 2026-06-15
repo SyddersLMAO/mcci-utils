@@ -26,5 +26,8 @@ public class Config {
 
     @SerialEntry
     public FishingHudPosition fishingHudPosition = FishingHudPosition.TOP_LEFT;
+
+    @SerialEntry
+    public int fishingHudFadeTimer = 5;
 }
 
