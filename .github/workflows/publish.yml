@@ -7,7 +7,7 @@ on:
   workflow_dispatch:
 
 env:
-  MINECRAFT_VERSION: 26..2
+  MINECRAFT_VERSION: 26.1.2
   JAVA_VERSION: 25
   VERSION: 2.0.0
   RELEASE_NAME: MCCI Utils 2.0.0
