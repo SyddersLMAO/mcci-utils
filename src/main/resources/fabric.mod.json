@@ -18,8 +18,11 @@
 		"main": [
 			"com.sydders.mcciutils.MCCIUtils"
 		],
-		"fabric-datagen": [
-			"com.sydders.mcciutils.MCCIUtilsDataGenerator"
+		"client": [
+			"com.sydders.mcciutils.MCCIUtilsClient"
+		],
+		"modmenu": [
+			"com.sydders.mcciutils.ModMenuIntegration"
 		]
 	},
 	"mixins": [
@@ -29,6 +32,7 @@
 		"fabricloader": ">=0.19.3",
 		"minecraft": "~26.1.2",
 		"java": ">=25",
-		"fabric-api": "*"
+		"fabric-api": "*",
+		"yet_another_config_lib_v3": ">=3.9.4"
 	}
 }

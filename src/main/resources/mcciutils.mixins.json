@@ -3,7 +3,9 @@
 	"package": "com.sydders.mcciutils.mixin",
 	"compatibilityLevel": "JAVA_25",
 	"mixins": [
-		"ExampleMixin"
+      	"PlayerChatMessages",
+		"OnServerJoin",
+		"PlayerTabOverlayAccessor"
 	],
 	"injectors": {
 		"defaultRequire": 1
