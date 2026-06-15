@@ -3,10 +3,10 @@ name: Publish on GitHub, CurseForge & Modrinth
 on: [ pull_request, workflow_dispatch ]
 
 env:
-  MINECRAFT_VERSION: 1.21.10
-  JAVA_VERSION: 21
-  VERSION: 1.2.1
-  RELEASE_NAME: MCCI Utils 1.2.1
+  MINECRAFT_VERSION: 26..2
+  JAVA_VERSION: 25
+  VERSION: 2.0.0
+  RELEASE_NAME: MCCI Utils 2.0.0
 
 permissions:
   contents: write

@@ -1,11 +1,11 @@
 {
 	"required": true,
 	"package": "com.sydders.mcciutils.mixin",
-	"compatibilityLevel": "JAVA_21",
+	"compatibilityLevel": "JAVA_25",
 	"mixins": [
-		"ClientPlayNetworkHandlerMixin",
+      	"PlayerChatMessages",
 		"OnServerJoin",
-		"PlayerListHudAccessor"
+		"PlayerTabOverlayAccessor"
 	],
 	"injectors": {
 		"defaultRequire": 1

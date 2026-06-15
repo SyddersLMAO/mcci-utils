@@ -1,19 +1,12 @@
 package com.sydders.mcciutils.mixin;
 
+import com.sydders.mcciutils.Config;
 import com.sydders.mcciutils.MCCIUtils;
-import com.sydders.mcciutils.MCCIUtilsModConfig;
-import me.shedaniel.autoconfig.AutoConfig;
-import net.minecraft.client.MinecraftClient;
-import net.minecraft.client.network.ClientPlayNetworkHandler;
-import net.minecraft.client.world.ClientWorld;
-import net.minecraft.entity.Entity;
-import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.network.packet.s2c.play.ChatMessageS2CPacket;
-import net.minecraft.network.packet.s2c.play.GameJoinS2CPacket;
-import net.minecraft.network.packet.s2c.play.TitleS2CPacket;
-import net.minecraft.text.Text;
+import net.minecraft.client.Minecraft;
+import net.minecraft.client.multiplayer.ClientPacketListener;
+import net.minecraft.network.chat.Component;
+import net.minecraft.network.protocol.game.ClientboundLoginPacket;
 import org.spongepowered.asm.mixin.Mixin;
-import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
@@ -21,32 +14,31 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-@Mixin(ClientPlayNetworkHandler.class)
+@Mixin(ClientPacketListener.class)
 public class OnServerJoin {
-    MCCIUtilsModConfig config = AutoConfig.getConfigHolder(MCCIUtilsModConfig.class).getConfig();
 
-    @Inject(method = "onGameJoin", at = @At("HEAD"))
-    private void onServerJoin(GameJoinS2CPacket packet, CallbackInfo ci) {
-        if (!config.autoFishtance) return;
 
-        MinecraftClient client = MinecraftClient.getInstance();
+    @Inject(method = "handleLogin", at = @At("HEAD"))
+    private void onServerJoin(ClientboundLoginPacket packet, CallbackInfo ci) {
+        boolean autoInstanceToggle = Config.HANDLER.instance().autoInstance;
+        int autoInstanceNumber = Config.HANDLER.instance().autoInstanceNumber;
+        if (!autoInstanceToggle) return;
 
-        Text footer = ((PlayerListHudAccessor) client.inGameHud.getPlayerListHud()).getFooter();
+        Minecraft client = Minecraft.getInstance();
+        Component footer = ((PlayerTabOverlayAccessor) client.gui.getTabList()).getFooter();
         if (footer == null) return;
 
         String footerText = footer.getString();
-        Pattern pattern = Pattern.compile("INSTANCE (\\d+)");
+        Pattern pattern = Pattern.compile("Instance (\\d+)");
         Matcher matcher = pattern.matcher(footerText);
-
-        MCCIUtils.LOGGER.info(footerText);
 
         if (matcher.find()) {
             int currentInstance = Integer.parseInt(matcher.group(1));
-            if (currentInstance != config.instance) {
-                client.player.networkHandler.sendChatCommand("instance join " + config.instance);
+            if (currentInstance != autoInstanceNumber) {
+                client.player.connection.sendCommand("instance join " + autoInstanceNumber);
             }
         } else {
-            client.player.networkHandler.sendChatCommand("instance join " + config.instance);
+            client.player.connection.sendCommand("instance join " + autoInstanceNumber);
         }
     }
 }
