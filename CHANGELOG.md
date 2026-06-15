@@ -1,1 +1,0 @@
-* Added the option to send a configurable message when the game is over (aka Auto GG)
