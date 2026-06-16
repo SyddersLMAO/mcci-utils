@@ -13,6 +13,7 @@ public class ModMenuIntegration implements ModMenuApi {
     public ConfigScreenFactory<?> getModConfigScreenFactory() {
         return parentScreen -> YetAnotherConfigLib.createBuilder()
                 .title(Component.literal("MCCI Utils Config"))
+                .save(() -> Config.HANDLER.save())
                 .category(ConfigCategory.createBuilder()
                         .name(Component.literal("General"))
                         .option(Option.<Boolean>createBuilder()
