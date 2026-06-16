@@ -2,6 +2,7 @@ package com.sydders.mcciutils.mixin;
 
 import com.sydders.mcciutils.Config;
 import com.sydders.mcciutils.MCCIUtils;
+import net.minecraft.client.Minecraft;
 import net.minecraft.client.multiplayer.ClientPacketListener;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.FontDescription;
@@ -93,6 +94,10 @@ public class PlayerChatMessages {
 				}
 			}
 			ci.cancel();
+		}
+
+		if (msg.contains("Game Over") && Config.HANDLER.instance().sendGameOverMessage) {
+			Minecraft.getInstance().player.connection.sendChat(Config.HANDLER.instance().gameOverMessage);
 		}
 	}
 }

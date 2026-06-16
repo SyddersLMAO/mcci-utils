@@ -9,8 +9,8 @@ on:
 env:
   MINECRAFT_VERSION: 26.1.2
   JAVA_VERSION: 25
-  VERSION: 2.0.0
-  RELEASE_NAME: MCCI Utils 2.0.0
+  VERSION: 2.1.0
+  RELEASE_NAME: MCCI Utils 2.1.0
 
 permissions:
   contents: write
